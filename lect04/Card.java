@@ -1,25 +1,48 @@
-public class Card {
-  public static final String[] RANKS = { 
-    null, "Ace", "2", "3", "4", "5", "6",
-    "7", "8", "9", "10", "Jack", "Queen", "King"};
+//Student ID:6230301091
+//First Name : Ittikhon
+//Last Name: Chaipool
 
-  public static final String[] SUITS = {
-    "Clubs", "Diamonds", "Hearts", "Spades"};
+
+//Team MEMBERS:
+//1. 6230301091 Ittikhon Chaipool
+//2. 6230300761 Pattaraton Prangprakhon
+
+public class Card {
+
+public enum Rank {
+  ACE,
+  TWO,
+  THREE,
+  FOUR,
+  FIVE,
+  SIX,
+  SEVEN,
+  EIGHT,
+  NINE,
+  TEN,
+  JACK,
+  QUEEN,
+  KING
+}
+
+public enum Suit {
+  CLUBS,
+  DIAMOND,
+  HEARTS,
+  SPADES
+}
 
   private final int rank;
   private final int suit;
-  
-  // Queens of Spades: rank = 12, suit=3
-  // Five of Diamonds: rank = 5, suit=1
 
-  public Card(int rank, int suit) {
+
+  public Card(RANK rank, Suit suit) {
     this.rank = rank;
     this.suit = suit;
   }
 
-  //override method toString of java.lang.Object
   public String toString() {
-    String s = RANKS[this.rank] + " of " + SUITS[this.suit];
+    String s = this.rank + " of " + this.suit;
     return s;
   }
 
@@ -27,21 +50,20 @@ public class Card {
     return this.rank == that.rank && this.suit == that.suit;
   }
 
-  // compareTo 
+  // compareTo
   public int compareTo(Card that) {
-    if (this.suit < that.suit) {
-      return -1;
+    int cmp_suit = this.suit.compareTo(that.suit);
+    int cmp_rank = this.rank.compareTo(that.rank);
+
+    if ((cmp_suit == 0) && (cmp_rank == 0)) {
+      return 0;
     }
-    if (this.suit > that.suit) {
-      return 1;
+
+    if (cmp_suit != 0) {
+      return cmp_suit;
+    } else {
+      return cmp_rank;
     }
-    if (this.rank < that.rank) {
-      return -1;
-    }
-    if (this.rank > that.rank) {
-      return 1;
-    }
-    return 0;
   }
   // accessor method
   public int getRank() {
@@ -53,6 +75,6 @@ public class Card {
     return this.suit;
   }
 
-  // no setter method due to 'immutable' 
+  // no setter method due to 'immutable'
 
 }
